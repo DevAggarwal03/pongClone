@@ -92,9 +92,18 @@ function Circle(x, y, dx, dy, radius) {
       this.dy = -this.dy;
     }
     // bouncing the ball if it hits the rectangle
-    if(((this.y + this.radius) < leftRec.y && this.y - this.radius > (leftRec.y + leftRec.height) && (this.x - this.radius) < (leftRec.x + leftRec.width)) || ((this.y + this.radius) < rightRec.y && this.y - this.radius > (rightRec.y + rightRec.height) && (this.radius + this.radius) > rightRec.x)){
-        this.dx = -this.dx;
+    
+    if((this.y > leftRec.y && this.y < leftRec.y + leftRec.height) && (this.x - this.radius <= leftRec.x + leftRec.width) && (this.dx <= 0)){
+      this.dx = -this.dx;
     }
+    if((this.y > rightRec.y && this.y < rightRec.y + rightRec.height) && (this.x + this.radius >= rightRec.x) && (this.dx >= 0)){
+      this.dx = -this.dx;
+    }
+
+    if(this.x - this.radius <= 0 || this.x + this.radius >= innerWidth){
+      initBall()
+    }
+
     this.x += this.dx;
     this.y += this.dy;
     this.draw();
@@ -103,7 +112,7 @@ function Circle(x, y, dx, dy, radius) {
 
 function init() {
   rectancles = [];
-  recLeft = new Rectangle(80, posLeftY, recWidth, recHeight);
+  recLeft = new Rectangle(80-recWidth, posLeftY, recWidth, recHeight);
   rectancles.push(recLeft);
   recRight = new Rectangle(innerWidth - 80, posRightY, recWidth, recHeight);
   rectancles.push(recRight);
@@ -111,12 +120,14 @@ function init() {
   rectancles[1].draw();
 }
 
+let speed = [Math.random() * 5 - 10, Math.random() * 5 + 5]
+
 function initBall() {
   radius = 40;
   x = innerWidth / 2;
   y = radius + Math.random() * (innerHeight - 2 * radius);
-  dx = Math.random() * 8 - 4;
-  dy = Math.random() * 8 - 4;
+  dx = speed[Math.floor(Math.random() * 2)];
+  dy = speed[Math.floor(Math.random() * 2)];
   ball = new Circle(x, y, dx, dy, radius);
   ball.draw();
 }
