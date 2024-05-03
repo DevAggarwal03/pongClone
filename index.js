@@ -102,12 +102,12 @@ window.addEventListener("keydown", (e) => {
     option2S.firstElementChild.nextElementSibling.style.color = "rgb(206, 206, 206)";
   }
 
-  if (e.key == "Enter" && options.firstElementChild.innerHTML.includes("img")) {
-    location.href = "./MultiPlayer.html";
+  if (e.key == "Enter" && options.firstElementChild.innerHTML.includes("(2)")) {
+    location.href = "./SinglePlayer.html";
   }
   if (
     e.key == "Enter" &&
-    options.firstElementChild.nextElementSibling.innerHTML.includes("img")
+    options.firstElementChild.nextElementSibling.innerHTML.includes("(2)")
   ) {
     location.href = "./MultiPlayer.html";
   }

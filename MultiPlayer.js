@@ -322,5 +322,4 @@ function animate() {
   rectancles[0].update();
   rectancles[1].update();
   ball.update(rectancles[0], rectancles[1]);
-  console.log("hi");
 }
